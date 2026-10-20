@@ -1,0 +1,3 @@
+Answer a question about the conversation in `conv-26/conv.json`. If the question involves timing, use the conversation date for reference. Provide the shortest possible answer. Use words directly from the conversation when possible. Avoid using subjects in your answer. Your final message is taken as the answer.
+
+Question: {question}

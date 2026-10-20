@@ -1,0 +1,6 @@
+graphiti-core[kuzu] @ git+https://github.com/getzep/graphiti@16cdf7045378c8d53ae01f94e2fa60d238cb0f68
+kuzu==0.11.3
+neo4j==6.3.1
+pydantic==2.13.5
+jinja2==3.1.3
+tqdm==4.68.4

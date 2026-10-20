@@ -1,0 +1,39 @@
+{
+  "sdk": {
+    "package": "mem0ai",
+    "version": "2.1.0",
+    "repository": "https://github.com/mem0ai/mem0",
+    "tag": "v2.1.0",
+    "commit": "19f713408273fb1d657daa38d7b82ccf496d36d5"
+  },
+  "benchmark": {
+    "repository": "https://github.com/mem0ai/memory-benchmarks",
+    "commit": "4b61c5d31b9c668a12b4f5e78064248a02c82d2b",
+    "prompts_path": "benchmarks/locomo/prompts.py",
+    "prompts_sha256": "8ebac1ef60e9ab5caf99079fdaac038b85472e81491ed35e2d2655f3927c76c2"
+  },
+  "protocol": {
+    "turns_per_add": 1,
+    "top_k": 200,
+    "threshold": 0.1,
+    "rerank": false,
+    "with_evidence": false,
+    "user_profile": false,
+    "answer_prompt": "get_answer_generation_prompt",
+    "judge_prompt": "get_judge_prompt",
+    "category_3_reference": "before_first_semicolon",
+    "speaker_mapping": "dataset_speaker_a=user; other_speaker=assistant",
+    "reference_date": "last_chronological_session_date",
+    "extraction": {"temperature": 0.1, "max_tokens": 2000, "top_p": 0.1},
+    "native_answer_judge": {"temperature": 0, "max_tokens": 4096, "seed": null},
+    "native_answer_messages": "user_only",
+    "input": "text_only_without_blip_caption_or_query"
+  },
+  "adaptations": [
+    "local OSS 2.1.0, not benchmark HTTP server or managed platform",
+    "GPT-4o-mini for work/answer/judge; text-embedding-3-small",
+    "text-only input; no image captions",
+    "session date in message and created_at metadata; OSS timestamp unsupported",
+    "atomic local database snapshots with durable API response replay"
+  ]
+}

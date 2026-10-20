@@ -1,0 +1,12 @@
+.env
+.venv
+__pycache__/
+results/
+.DS_Store
+papers/arxiv/arxiv.tar.gz
+papers/arxiv/*.aux
+papers/arxiv/*.log
+papers/arxiv/*.blg
+papers/arxiv/*.out
+papers/arxiv/*.fls
+papers/arxiv/*.fdb_latexmk

@@ -1,0 +1,125 @@
+\begin{thebibliography}{19}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Chhikara et~al.(2025)Chhikara, Khant, Aryan, Singh, and
+  Yadav]{chhikara2025mem0}
+P.~Chhikara, D.~Khant, S.~Aryan, T.~Singh, and D.~Yadav.
+\newblock {Mem0}: Building production-ready {AI} agents with scalable long-term
+  memory, 2025.
+\newblock URL \url{https://arxiv.org/abs/2504.19413}.
+
+\bibitem[Rasmussen et~al.(2025)Rasmussen, Paliychuk, Beauvais, Ryan, and
+  Chalef]{rasmussen2025zep}
+P.~Rasmussen, P.~Paliychuk, T.~Beauvais, J.~Ryan, and D.~Chalef.
+\newblock Zep: A temporal knowledge graph architecture for agent memory, 2025.
+\newblock URL \url{https://arxiv.org/abs/2501.13956}.
+
+\bibitem[{Pi contributors}(2026)]{pi2026}
+{Pi contributors}.
+\newblock Pi coding agent: Compaction and session persistence.
+\newblock Software documentation and source, 2026.
+\newblock URL \url{https://github.com/earendil-works/pi}.
+
+\bibitem[{OpenAI}(2026)]{codex2026}
+{OpenAI}.
+\newblock Codex: An open-source coding agent, 2026.
+\newblock URL \url{https://github.com/openai/codex}.
+
+\bibitem[{Anthropic}(2026)]{claudecode2026}
+{Anthropic}.
+\newblock Claude code, 2026.
+\newblock URL \url{https://github.com/anthropics/claude-code}.
+
+\bibitem[Zhang et~al.(2025{\natexlab{a}})Zhang, Kraska, and
+  Khattab]{zhang2025rlm}
+A.~L. Zhang, T.~Kraska, and O.~Khattab.
+\newblock Recursive language models, 2025{\natexlab{a}}.
+\newblock URL \url{https://arxiv.org/abs/2512.24601}.
+
+\bibitem[Sutton(2019)]{sutton2019bitter}
+R.~S. Sutton.
+\newblock The bitter lesson.
+\newblock Essay, 2019.
+\newblock URL \url{http://www.incompleteideas.net/IncIdeas/BitterLesson.html}.
+
+\bibitem[Robertson and Zaragoza(2009)]{robertson2009bm25}
+S.~Robertson and H.~Zaragoza.
+\newblock The probabilistic relevance framework: {BM25} and beyond.
+\newblock \emph{Foundations and Trends in Information Retrieval}, 3\penalty0
+  (4):\penalty0 333--389, 2009.
+\newblock \doi{10.1561/1500000019}.
+
+\bibitem[Maharana et~al.(2024)Maharana, Lee, Tulyakov, Bansal, Barbieri, and
+  Fang]{maharana2024locomo}
+A.~Maharana, D.-H. Lee, S.~Tulyakov, M.~Bansal, F.~Barbieri, and Y.~Fang.
+\newblock Evaluating very long-term conversational memory of {LLM} agents,
+  2024.
+\newblock URL \url{https://arxiv.org/abs/2402.17753}.
+
+\bibitem[{Arena Team}(2026)]{arena2026harnesstax}
+{Arena Team}.
+\newblock {HarnessTax}: How much does the harness matter for coding agents?
+\newblock Arena blog, 2026.
+\newblock URL \url{https://arena.ai/blog/coding-agents-harness-tax}.
+
+\bibitem[Wu et~al.(2026)Wu, Chen, Huang, et~al.]{wu2026basics}
+Y.~Wu, W.~Chen, Z.~Huang, et~al.
+\newblock Back to basics: Let conversational agents remember with just
+  retrieval and generation, 2026.
+\newblock URL \url{https://arxiv.org/abs/2604.11628}.
+
+\bibitem[Wang(2026)]{wang2026memdelta}
+K.~Wang.
+\newblock {MemDelta}: Controlled baselines and hidden confounds in agent memory
+  evaluation, 2026.
+\newblock URL \url{https://arxiv.org/abs/2606.29914}.
+
+\bibitem[An(2026)]{an2026fidelity}
+T.~An.
+\newblock Fidelity before structure: Verbatim chunks beat lossy artifact
+  extraction in long-conversation {LLM} memory, 2026.
+\newblock URL \url{https://arxiv.org/abs/2601.00821}.
+
+\bibitem[Wu et~al.(2024)Wu, Wang, Yu, Zhang, Chang, and Yu]{wu2024longmemeval}
+D.~Wu, H.~Wang, W.~Yu, Y.~Zhang, K.-W. Chang, and D.~Yu.
+\newblock {LongMemEval}: Benchmarking chat assistants on long-term interactive
+  memory, 2024.
+\newblock URL \url{https://arxiv.org/abs/2410.10813}.
+
+\bibitem[Zhang et~al.(2025{\natexlab{b}})Zhang, Ren, Zhan,
+  et~al.]{zhang2025memevolve}
+G.~Zhang, H.~Ren, C.~Zhan, et~al.
+\newblock {MemEvolve}: Meta-evolution of agent memory systems,
+  2025{\natexlab{b}}.
+\newblock URL \url{https://arxiv.org/abs/2512.18746}.
+
+\bibitem[Lee et~al.(2026)Lee, Nair, Zhang, Lee, Khattab, and
+  Finn]{lee2026metaharness}
+Y.~Lee, R.~Nair, Q.~Zhang, K.~Lee, O.~Khattab, and C.~Finn.
+\newblock Meta-harness: End-to-end optimization of model harnesses, 2026.
+\newblock URL \url{https://arxiv.org/abs/2603.28052}.
+
+\bibitem[Gallant(2016)]{gallant2016ripgrep}
+A.~Gallant.
+\newblock ripgrep.
+\newblock Software, 2016.
+\newblock URL \url{https://github.com/BurntSushi/ripgrep}.
+
+\bibitem[{Zvec Team}(2026)]{zvec2026zg}
+{Zvec Team}.
+\newblock From rg to zg: Local search beyond keywords.
+\newblock Zvec blog, 2026.
+\newblock URL \url{https://zvec.org/en/blog/2026-08-28-zvec-grep-open-source/}.
+
+\bibitem[{Harbor Framework Team}(2026)]{harbor2026}
+{Harbor Framework Team}.
+\newblock Harbor: A framework for evaluating and optimizing agents and models
+  in container environments.
+\newblock Software, 2026.
+\newblock URL \url{https://doi.org/10.5281/zenodo.20953922}.
+
+\end{thebibliography}

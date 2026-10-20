@@ -1,0 +1,79 @@
+{
+  "official_repository": "https://github.com/snap-research/locomo",
+  "official_commit": "3eb6f2c585f5e1699204e3c3bdf7adc5c28cb376",
+  "official_path": "data/locomo10.json",
+  "official_download_url": "https://raw.githubusercontent.com/snap-research/locomo/3eb6f2c585f5e1699204e3c3bdf7adc5c28cb376/data/locomo10.json",
+  "license": "CC-BY-NC-4.0",
+  "source_sha256": "79fa87e90f04081343b8c8debecb80a9a6842b76a7aa537dc9fdf651ea698ff4",
+  "source_bytes": 2805274,
+  "subset": {
+    "path": "data/locomo-conv26.json",
+    "conversation": "conv-26",
+    "how": "The conv-26 entry of the official file, unchanged, written as a one-element list with json.dumps(indent=2), the formatting that reproduces the official file byte for byte.",
+    "sha256": "ef1eaea3e023cf376dda459a7dc355088dc9be05caf6bd8682a50a1db7898fc8",
+    "bytes": 229170,
+    "sessions": 19,
+    "turns": 419,
+    "qa_total": 199,
+    "qa_by_category": {
+      "1": 32,
+      "2": 37,
+      "3": 13,
+      "4": 70,
+      "5": 47
+    },
+    "evaluation_categories": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "evaluation_questions": 152
+  },
+  "agent_workspace": {
+    "path": "data/playground/conv-26/conv.json",
+    "source": "https://github.com/zedong-peng/playground-locomo",
+    "source_commit": "37b2e73",
+    "how": "The conversation object of the conv-26 entry, unchanged, written with json.dumps(indent=2, ensure_ascii=False) and a final newline: the playground's conv-26/conv.json byte for byte. It holds no questions or answers.",
+    "sha256": "5827e7ec11c8ec8bf20cdbd380b0b59e0e31c58dfd1251bb01d42050e6b3a1a4",
+    "bytes": 117885
+  },
+  "official_conversations": 10,
+  "official_turns": 5882,
+  "official_qa_total": 1986,
+  "official_qa_by_category": {
+    "1": 282,
+    "2": 321,
+    "3": 96,
+    "4": 841,
+    "5": 446
+  },
+  "official_evaluation_categories": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "official_evaluation_questions": 1540,
+  "mem0_protocol_sources": {
+    "repository": "https://github.com/mem0ai/mem0",
+    "commit": "693e709389526b45cfadfd06d89a0e13af7c7345",
+    "paper": "https://arxiv.org/abs/2504.19413",
+    "license": "Apache-2.0 (repository LICENSE; evaluation README labels itself MIT)",
+    "files": [
+      {
+        "upstream_path": "evaluation/src/rag.py",
+        "local_path": "src/common/mem0_eval/rag.py",
+        "sha256": "a3a1da3a97ae50acbc75207e59723b3d0c8a806c81b3321f0a7cf8874ce0cc07",
+        "local_sha256": "325f1a30174e39076c8556a63b1bd7890443cc63517429bb1673721ae914379f",
+        "validation": "The pinned upstream file with one change: load_dotenv() runs in RAGManager.__init__ instead of on import. Every method answers with its prompt and generate_response."
+      },
+      {
+        "upstream_path": "evaluation/metrics/llm_judge.py",
+        "sha256": "ac2e242f6ea0b817ba1b229ff9e5271f6846b7b8a9aefa8a5a5a81ea58df3b3c",
+        "validation": "Byte-identical upstream download checked 2026-09-20; its ACCURACY_PROMPT is src/common/mem0_judge.py PROMPT. The vendored copy is no longer kept."
+      }
+    ],
+    "adaptations": "Shared runner, model choice, response parsing and usage accounting are local; upstream scripts are not entry points."
+  }
+}

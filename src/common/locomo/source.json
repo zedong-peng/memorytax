@@ -1,0 +1,12 @@
+{
+  "repository": "https://github.com/snap-research/locomo",
+  "commit": "3eb6f2c585f5e1699204e3c3bdf7adc5c28cb376",
+  "path": "task_eval/evaluation.py",
+  "upstream_sha256": "8e3be5d57ff2ff9ec5cd05939592f468c5f3f1fd95d13e431932bdf6bf0fd6fd",
+  "copied_functions": [
+    "normalize_answer",
+    "f1_score",
+    "f1"
+  ],
+  "adaptation": "Only QA F1 functions imported; category dispatch follows eval_question_answering. No scoring rule changes."
+}
