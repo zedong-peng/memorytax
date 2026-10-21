@@ -744,12 +744,15 @@ Just return the label CORRECT or WRONG in a json format with the key as &quot;la
       const nearest = (x, y) => g.xs.map((px, i) => [px, g.ys[i]])
         .reduce((a, b) => (Math.hypot(b[0] - x, b[1] - y) < Math.hypot(a[0] - x, a[1] - y) ? b : a));
       const spots = [];
-      for (const dx of [0, -0.5, 0.5, -1, 1, -1.5, 1.5, 2, 2.5, 3])
-        for (const y of [top - 16 - h, top - 20 - 2 * h, (top + bottom) / 2 - h / 2, bottom + 16, bottom + 20 + h, bottom + 24 + 2 * h]) {
+      // Below and above, then to either side, then further out; a crossing leader costs far more than distance.
+      const rows = [top - 16 - h, top - 20 - 2 * h, bottom + 16, bottom + 20 + h, (top + bottom) / 2 - h / 2,
+        bottom + 24 + 2 * h, top - 24 - 3 * h];
+      for (const dx of [0, -0.7, 0.7, -1.1, 1.1, -1.5, 1.5, -2, 2, -2.5, 2.5, 3, -3, 3.5, -3.5, 4])
+        for (const y of rows) {
           const x = Math.min(Math.max(cx + dx * (w + 16), M.l + w / 2 + 4), W - 4 - w / 2);
           const box = { x0: x - w / 2, x1: x + w / 2, y0: y, y1: y + h };
           spots.push({ x, y, box, s: score(box, Math.hypot(x - cx, y + h / 2 - (top + bottom) / 2))
-                                     + 100 * crossings(box, [...nearest(x, y + h / 2), x, y + h / 2]) });
+                                     + 600 * crossings(box, [...nearest(x, y + h / 2), x, y + h / 2]) });
         }
       const spot = spots.reduce((a, b) => (b.s < a.s ? b : a));
       taken.push(spot.box);

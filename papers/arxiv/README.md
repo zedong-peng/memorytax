@@ -4,11 +4,12 @@
 
 | File | Role |
 | --- | --- |
-| `build.py` | `../data/*.json` and `../../data/locomo-conv26.json` → `figures/*.pdf`, `tables/*.tex`; prints the numbers the text quotes |
+| `build.py` | `../data/*.json` and `../../data/locomo-conv26.json` → `tables/*.tex`, then `webfig.mjs` for the figures; prints the numbers the text quotes |
+| `webfig.mjs` | opens `../index.html` in headless Chromium and writes each figure's own SVG to `figures/*.pdf`, one vector page per figure, so the paper draws what the page draws |
 | `main.tex`, `refs.bib` | the paper |
 | `main.bbl`, `main.pdf` | its build, committed so the tarball can be made without TeX |
 
-Build on a machine with matplotlib (3.8.2 was used) and TeX Live, from this directory:
+Build on a machine with TeX Live, node 22 or later, and a Chromium (Playwright's, or `CHROME=/path/to/chrome`), from this directory:
 
     python3 build.py
     latexmk -pdf main.tex

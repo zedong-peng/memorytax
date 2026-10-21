@@ -6,6 +6,7 @@
 \usepackage{microtype}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\renewcommand{\arraystretch}{1.05}
 \usepackage{xcolor}
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage[font=small,labelfont=bf]{caption}
@@ -15,6 +16,8 @@
 \usepackage[colorlinks,linkcolor=black,citecolor=black,urlcolor=blue!50!black]{hyperref}
 \hypersetup{pdftitle={MemoryTax: The Bitter Lesson of Agent Memory}, pdfauthor={Zedong Peng}}
 
+% Figures and tables share one frame: a hairline above and below, the caption in small type.
+\newcommand{\figrule}{\color{black!18}\hrule height 0.4pt}
 \lstset{basicstyle=\footnotesize\ttfamily, columns=fullflexible, keepspaces, breaklines, breakatwhitespace, breakindent=0pt,
   frame=single, rulecolor=\color{black!25}, xleftmargin=3pt, xrightmargin=3pt, upquote,
   literate={’}{{\textquoteright}}1}
@@ -25,6 +28,11 @@
 
 \begin{document}
 \maketitle
+
+\begin{center}
+\large\href{https://zedongpeng.com/memorytax/}{Interactive version: \textbf{zedongpeng.com/memorytax}}
+\end{center}
+\vspace{-0.4em}
 
 \begin{abstract}
 Agent memory systems such as Mem0 and Zep decide what to keep before any question arrives; coding agents keep the raw history and let the model search it with its own tools. We ask whether designed memory still helps once the model is strong enough to search for itself. On one LoCoMo conversation (419 turns, 152 questions), we run four memory methods (full context, BM25, Mem0, Zep) and three coding agents (Pi, Codex, Claude Code), each with GPT-4o-mini, GPT-6 Luna and Claude Opus 5.5, and record what every rollout costs. This is a short empirical study, with one conversation and one run per cell. Agent memory is a costly patch for a weak model: Mem0 beats full context only with GPT-4o-mini, and its build alone costs more than a whole full-context rollout. Agent memory also has a ceiling, set by the model that writes it: a stronger reader does not recover what a weaker writer left out. With Claude Opus 5.5, Pi tops the cost--accuracy frontier, scoring 99\% for less than half the cost of full context; its one miss is a wrong answer key. Part of that lead comes from photo captions that only the agents could read: on the 88 questions whose evidence has no photo, Pi and full context differ by one answer.
@@ -48,8 +56,9 @@ The study is small: one conversation, one run per cell, and a GPT-4o-mini judge.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\linewidth]{figures/frontier.pdf}
-\caption{Cost and correct rate per rollout. Each badge is one cell's whole run: the build, then all 152 questions. Colour is the model and the letter the method (F full context, B BM25, M Mem0, Z Zep, P Pi, C Codex, CC Claude Code). The stepped line is the highest correct rate reached at or below each cost, and the labelled cells lie on it. Cost is on a log axis.}
+\figrule\par\vspace{2pt}
+\includegraphics[width=0.68\linewidth]{figures/frontier.pdf}\par\vspace{2pt}\figrule
+\caption{Cost and correct rate per rollout. Each badge is one cell's whole run: the build, then all 152 questions. Colour is the model, the badge the method's mark, and a letter in the badge marks a method without one (F full context, B BM25). The stepped line is the highest correct rate reached at or below each cost, and the labelled cells lie on it. Cost is on a log axis.}
 \label{fig:frontier}
 \end{figure}
 
@@ -58,13 +67,14 @@ The study is small: one conversation, one run per cell, and a GPT-4o-mini judge.
 
 We run 21 cells, seven methods with three models each, on LoCoMo conv-26~\citep{maharana2024locomo}: 419 turns in 19 sessions and 152 single-hop, multi-hop, temporal and open-domain questions. LoCoMo's adversarial questions are left out, as in Mem0's evaluation~\citep{chhikara2025mem0}. The history fits every model's context window. Among the ten LoCoMo conversations, conv-26's per-method accuracies track those of the full set closely. Table~\ref{tab:methods} lists the methods.
 
-\begin{table}[h]
+\begin{table}[t]
 \centering
 \caption{Methods: what each stores and what the model sees when it answers.}
 \label{tab:methods}
-\begin{tabular}{lll}
+\small
+\begin{tabular}{@{}lll@{}}
 \toprule
-Method & Stored & Model sees \\
+\textbf{Method} & \textbf{Stored} & \textbf{Model sees} \\
 \midrule
 Full context & raw history & all of it \\
 BM25 & raw turns & top-8 turns, $\pm$2 \\
@@ -92,8 +102,9 @@ With the two stronger models, the patch stops helping. With GPT-6 Luna, full con
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\linewidth]{figures/cumulative.pdf}
-\caption{Cumulative cost--correct curves. Each curve is one rollout: the build, then the questions from cheapest to most expensive (equal costs grouped), adding up cost and correct answers; correct answers are divided by 152, so a wrong answer adds cost only. Colour is the model and the badge the method; agents are dotted. The cost axis is linear to \$2 and logarithmic above. Curves use a nine-point moving average, and the badges mark the unsmoothed totals of Table~\ref{tab:results}. Strong lines are cells that no other cell beats on both cost and correct answers.}
+\figrule\par\vspace{2pt}
+\includegraphics[width=0.68\linewidth]{figures/cumulative.pdf}\par\vspace{2pt}\figrule
+\caption{Cumulative cost--correct curves. Each curve is one rollout: the build, then the questions from cheapest to most expensive (equal costs grouped), adding up cost and correct answers; correct answers are divided by 152, so a wrong answer adds cost only. Colour is the model, the badge the method, and agents are dotted. The cost axis is linear to \$2 and logarithmic above. Curves use a nine-point moving average, and the badges mark the unsmoothed totals of Table~\ref{tab:results}. Strong lines are cells that no other cell beats on both cost and correct answers.}
 \label{fig:cumulative}
 \end{figure}
 
@@ -106,7 +117,8 @@ The model that writes the store limits every reader. Mem0 and Zep write their st
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\linewidth]{figures/cross.pdf}
+\figrule\par\vspace{2pt}
+\includegraphics[width=0.68\linewidth]{figures/cross.pdf}\par\vspace{2pt}\figrule
 \caption{Writer and reader. Each colour is one store, written by that model. The filled badge is the writer reading its own store, and arrows run from it to the other two readers.}
 \label{fig:cross}
 \end{figure}
@@ -138,7 +150,6 @@ The findings rest on a small study, and these limits apply:
 
 Memory systems and harnesses can also be searched for automatically~\citep{zhang2025memevolve,lee2026metaharness}, but what is found is still fixed before the question arrives. More broadly, a strong model may need less designed memory and better tools: exact, semantic and vector search over the raw record, driven by the model itself~\citep{pi2026,codex2026}. Progress may then look less like another memory system and more like ripgrep after grep~\citep{gallant2016ripgrep}, or zvec-grep after ripgrep~\citep{zvec2026zg}. Designed memory may survive as a cost trade-off when many questions share one history (Figure~\ref{fig:cumulative}).
 
-An interactive version of this paper is at \url{https://zedongpeng.com/memorytax/}; the code and data are at \url{https://github.com/zedong-peng/memorytax}.
 
 \bibliographystyle{unsrtnat}
 \bibliography{refs}
@@ -150,36 +161,36 @@ An interactive version of this paper is at \url{https://zedongpeng.com/memorytax
 
 Table~\ref{tab:results} gives every cell's cost and correct rate, Table~\ref{tab:cross} the writer--reader grid behind Figure~\ref{fig:cross}, and Table~\ref{tab:photos} the split by photo evidence. Figure~\ref{fig:usage} redraws Figure~\ref{fig:cumulative} against turns and tokens.
 
-\begin{table}[h]
+\begin{table}[p]
 \centering
 \caption{Per method and model. Cost is the list price of every model call except the judge: Build is paid once, before any question; Per q.\ is everything one question costs, retrieval included, averaged over the 152 questions. $\circ$: nothing is built. Effort: the model's reasoning effort; GPT-4o-mini has none. Correct: share of answers judged correct, in \%, per LoCoMo category (single-hop, multi-hop, temporal, open-domain); the first row gives each category's size.}
 \label{tab:results}
-\small
-\setlength{\tabcolsep}{4.5pt}
+\small\setlength{\tabcolsep}{5pt}%
 \input{tables/results.tex}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[p]
 \centering
 \caption{Writer and reader. Correct rate (\%), the reader answering from the writer's store and its retrievals. Bold: one model writes and reads (Table~\ref{tab:results}).}
 \label{tab:cross}
 \small
+\small\setlength{\tabcolsep}{7pt}%
 \input{tables/cross.tex}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[p]
 \centering
 \caption{Correct rate (\%) on the 64 questions with evidence in a turn that shares a photo, whose caption only the agents could read, and on the other 88.}
 \label{tab:photos}
-\small
-\setlength{\tabcolsep}{4.5pt}
+\small\setlength{\tabcolsep}{6pt}%
 \input{tables/photos.tex}
 \end{table}
 
-\begin{figure}[h]
+\begin{figure}[p]
 \centering
-\includegraphics[width=\linewidth]{figures/usage.pdf}
-\caption{The curves of Figure~\ref{fig:cumulative} against turns (LLM calls) and tokens, on linear axes, the questions ordered by that amount. Strong lines are cells that no other cell beats on both that amount and correct answers.}
+\figrule\par\vspace{2pt}
+\includegraphics[width=0.68\linewidth]{figures/usage.pdf}\par\vspace{2pt}\figrule
+\caption{The curves of Figure~\ref{fig:cumulative} against turns (LLM calls, top) and tokens (bottom), on linear axes, the questions ordered by that amount. Strong lines are cells that no other cell beats on both that amount and correct answers.}
 \label{fig:usage}
 \end{figure}
 
