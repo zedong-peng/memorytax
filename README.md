@@ -1,6 +1,6 @@
 # MemoryTax: The Bitter Lesson of Agent Memory
 
-Code and data for [MemoryTax](https://zedongpeng.com/memorytax/). On one LoCoMo conversation (conv-26, 152 judged questions) it runs four memory methods (full context, BM25, Mem0, Zep) and three coding agents that search the raw conversation file (Pi, Codex, Claude Code), each with GPT-4o-mini, GPT-6 Luna and Claude Opus 5.5, and records every answer, verdict and cost.
+Code and data for [MemoryTax](https://zedongpeng.com/memorytax/) ([arXiv:2610.29823](https://arxiv.org/abs/2610.29823)). On one LoCoMo conversation (conv-26, 152 judged questions) it runs four memory methods (full context, BM25, Mem0, Zep) and three coding agents that search the raw conversation file (Pi, Codex, Claude Code), each with GPT-4o-mini, GPT-6 Luna and Claude Opus 5.5, and records every answer, verdict and cost.
 
 ```text
 data/      LoCoMo conv-26 and the agents' workspace (data/README.md)
@@ -32,9 +32,12 @@ The code is MIT (`LICENSE`). The LoCoMo data is CC BY-NC 4.0 (`src/common/locomo
 
 ```bibtex
 @misc{peng2026memorytax,
-  title  = {{MemoryTax: The Bitter Lesson of Agent Memory}},
-  author = {Peng, Zedong},
-  year   = {2026},
-  url    = {https://zedongpeng.com/memorytax/},
+  title         = {{MemoryTax: The Bitter Lesson of Agent Memory}},
+  author        = {Peng, Zedong},
+  year          = {2026},
+  eprint        = {2610.29823},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2610.29823},
 }
 ```
