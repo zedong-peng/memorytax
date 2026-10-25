@@ -80,6 +80,24 @@ details.fold > summary > h2::after { content: "\25B8"; color: var(--muted); font
 details.fold[open] > summary > h2::after { content: "\25BE"; }
 code { font: .88em ui-monospace, "SF Mono", Menlo, Consolas, monospace; overflow-wrap: anywhere; }
 
+/* Side navigation */
+.toc { display: none; }
+@media (min-width: 78rem) {
+  .toc {
+    display: block; position: fixed; top: 3.4rem; left: calc(50% - 37.5rem); width: 13rem;
+    max-height: calc(100vh - 6rem); overflow-y: auto;
+    font: 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+}
+.toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--rule); }
+.toc li { margin: 0; }
+.toc li.gap { margin-top: .9rem; }
+.toc a { display: block; margin-left: -1px; padding: .28rem 0 .28rem .9rem; border-left: 2px solid transparent; color: var(--muted); transition: color .15s, border-color .15s; }
+.toc a:hover { color: var(--ink); text-decoration: none; }
+.toc a[aria-current] { color: var(--ink); border-left-color: var(--ink); }
+header, h2[id] { scroll-margin-top: 1.5rem; }
+@media print { .toc { display: none; } }
+
 /* Figures 1 and 2 */
 .chart-card {
   --card: #fbfbf9; --border: #e4e2db; --grid: #e6e5df; --axis: #c3c2b7; --tick: #6b6a65; --ink2: #52514e; --pill: #ffffff;
@@ -170,8 +188,23 @@ tr.group td { border-top: 1px solid var(--rule); }
 </style>
 </head>
 <body>
+<nav class="toc" aria-label="Contents">
+<ol>
+<li><a href="#top">Introduction</a></li>
+<li><a href="#setup">Experiment Setup</a></li>
+<li><a href="#memory">Finding 1: A costly patch</a></li>
+<li><a href="#cross">Finding 2: A ceiling</a></li>
+<li><a href="#harness">Finding 3: Pi tops the frontier</a></li>
+<li><a href="#ending">Ending Notes</a></li>
+<li class="gap"><a href="#citation">Citation</a></li>
+<li><a href="#references">References</a></li>
+<li class="gap"><a href="#results">Appendix A. Full results</a></li>
+<li><a href="#artifacts">Appendix B. Protocols</a></li>
+<li><a href="#prompts">Appendix C. Prompts</a></li>
+</ol>
+</nav>
 <main>
-<header>
+<header id="top">
 <h1>MemoryTax: The Bitter Lesson of Agent Memory</h1>
 <p class="byline">Zedong Peng, Shanghai Jiao Tong University · 11 October 2026 · <a href="https://arxiv.org/abs/2610.29823">arXiv</a> · <a href="https://github.com/zedong-peng/memorytax">Code and data</a></p>
 </header>
@@ -1414,6 +1447,38 @@ Just return the label CORRECT or WRONG in a json format with the key as &quot;la
     }, { threshold: 0.4 });
     io.observe(svg);
   }
+})();
+</script>
+<script>
+// The side navigation marks the section being read; a link to Experiment Setup opens it.
+(() => {
+  const links = [...document.querySelectorAll(".toc a")];
+  const targets = links.map(a => document.getElementById(a.hash.slice(1)));
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const open = id => { const d = document.getElementById(id)?.closest("details"); if (d) d.open = true; };
+  document.addEventListener("click", e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    open(a.hash.slice(1));
+    if (a.closest(".toc") && !reduced) {
+      e.preventDefault();
+      targets[links.indexOf(a)].scrollIntoView({ behavior: "smooth" });
+      history.pushState(null, "", a.hash);
+    }
+  });
+  if (location.hash) open(location.hash.slice(1));
+  // A section is current once its heading passes a third of the way down; at the very bottom, the last one is.
+  let queued = false;
+  const mark = () => {
+    queued = false;
+    let i = 0;
+    targets.forEach((t, k) => { if (t.getBoundingClientRect().top <= innerHeight / 3) i = k; });
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) i = targets.length - 1;
+    links.forEach((a, k) => k === i ? a.setAttribute("aria-current", "location") : a.removeAttribute("aria-current"));
+  };
+  addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(mark); } }, { passive: true });
+  addEventListener("resize", mark);
+  mark();
 })();
 </script>
 </body>
