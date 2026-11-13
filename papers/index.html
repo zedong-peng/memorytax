@@ -70,16 +70,6 @@ header, h2[id] { scroll-margin-top: 1.5rem; }
   background: var(--card); border: 1px solid var(--border); border-radius: 12px;
   padding: 16px 18px 12px; font: 13px/1.45 var(--sans);
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .chart-card {
-    --card: #1f1e1c; --border: #34332f; --grid: #2c2c2a; --axis: #4a4945; --tick: #a3a19a; --ink2: #c3c2b7; --pill: #262522;
-    --m-mini: #d95926; --m-luna: #3987e5; --m-luna-high: #199e70; --m-opus: #c98500;
-  }
-}
-:root[data-theme="dark"] .chart-card {
-  --card: #1f1e1c; --border: #34332f; --grid: #2c2c2a; --axis: #4a4945; --tick: #a3a19a; --ink2: #c3c2b7; --pill: #262522;
-  --m-mini: #d95926; --m-luna: #3987e5; --m-luna-high: #199e70; --m-opus: #c98500;
-}
 .chart-title { margin: 0 0 10px; text-align: center; font-size: 15px; font-weight: 600; }
 .chart-filters { display: flex; align-items: flex-start; gap: 10px; }
 .filter-rows { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; align-items: center; flex: 1; }
