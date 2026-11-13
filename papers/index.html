@@ -5,58 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MemoryTax: The Bitter Lesson of Agent Memory</title>
 <link rel="canonical" href="https://zedongpeng.com/memorytax/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://zedongpeng.com/assets/css/site.css">
 <style>
-:root {
-  --bg: #fbfaf7;
-  --ink: #1f1f1e;
-  --muted: #6b6a65;
-  --rule: #dcdad3;
-  --soft: #f1efe9;
-  --link: #1f5fae;
-  --figure-bg: #ffffff;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #171716;
-    --ink: #e9e7e1;
-    --muted: #a3a19a;
-    --rule: #3a3936;
-    --soft: #23221f;
-    --link: #8db8ef;
-    --figure-bg: #ffffff;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #171716;
-  --ink: #e9e7e1;
-  --muted: #a3a19a;
-  --rule: #3a3936;
-  --soft: #23221f;
-  --link: #8db8ef;
-  --figure-bg: #ffffff;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--ink);
-  font: 17px/1.6 "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-}
-main { max-width: 44rem; margin: 0 auto; padding: 3rem 16px 5rem; }
-header { text-align: center; margin-bottom: 2.5rem; }
-h1 { font-size: 1.9rem; line-height: 1.25; margin: 0 0 .4rem; }
-.byline { color: var(--muted); font-size: .95rem; margin: 0; }
-h2 { font-size: 1.3rem; margin: 2.6rem 0 .6rem; }
-h3 { font-size: 1.05rem; margin: 1.6rem 0 .3rem; }
-p { margin: 0 0 .9rem; }
-a { color: var(--link); text-decoration: none; }
-a:hover { text-decoration: underline; }
+/* The site's theme comes from zedongpeng.com/assets/css/site.css; these names are the page's own. */
+:root { --ink: var(--fg); --rule: var(--line); --soft: var(--wash); --link: var(--accent); --figure-bg: #ffffff; }
+main { max-width: 720px; margin: 0 auto; padding: 72px 20px 0; font: 17px/1.6 var(--serif); }
+main > header { margin-bottom: 40px; }
+main > header h1 { margin: 0 0 12px; }
+.byline { font: 14px/1.55 var(--sans); color: var(--muted); margin: 0; }
 figure { margin: 1.8rem 0; }
 figure img { display: block; width: 100%; max-width: 34rem; margin: 0 auto; background: var(--figure-bg); border-radius: 6px; padding: .4rem; }
-figcaption { font-size: .9rem; line-height: 1.5; color: var(--muted); margin-top: .6rem; }
+figcaption { font: 14px/1.55 var(--sans); color: var(--muted); margin-top: .6rem; }
 figcaption b { color: var(--ink); }
 .table-wrap { overflow-x: auto; margin-bottom: .9rem; }
-table { border-collapse: collapse; margin: 0 auto; font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; font-variant-numeric: tabular-nums; }
+table { border-collapse: collapse; margin: 0 auto; font: 14px/1.4 var(--sans); font-variant-numeric: tabular-nums; }
 th, td { padding: .3rem .55rem; text-align: right; white-space: nowrap; }
 th:first-child, td:first-child { text-align: left; }
 thead tr:first-child th { text-align: center; border-bottom: 1px solid var(--rule); }
@@ -66,8 +31,8 @@ th { font-weight: 600; }
 tr.count td { color: var(--muted); font-style: italic; border-bottom: 1px solid var(--rule); }
 ul { padding-left: 1.2rem; }
 li { margin-bottom: .4rem; }
-pre { background: var(--soft); border-radius: 6px; padding: .8rem 1rem; font: 12.5px/1.5 ui-monospace, "SF Mono", Menlo, Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
-.refs { font-size: .9rem; line-height: 1.45; padding-left: 2rem; }
+pre { background: var(--soft); border-radius: 6px; padding: .8rem 1rem; font: 12.5px/1.5 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+.refs { font: 14px/1.55 var(--sans); padding-left: 2rem; }
 .refs li { margin-bottom: .45rem; }
 .cite { white-space: nowrap; font-size: .7em; line-height: 0; margin-left: .05em; }
 .cite a { text-decoration: none; }
@@ -78,21 +43,21 @@ details.fold > summary::-webkit-details-marker { display: none; }
 details.fold > summary > h2 { display: inline-block; }
 details.fold > summary > h2::after { content: "\25B8"; color: var(--muted); font-size: .8em; margin-left: .45rem; }
 details.fold[open] > summary > h2::after { content: "\25BE"; }
-code { font: .88em ui-monospace, "SF Mono", Menlo, Consolas, monospace; overflow-wrap: anywhere; }
+code { font: .88em var(--mono); overflow-wrap: anywhere; }
 
 /* Side navigation */
 .toc { display: none; }
 @media (min-width: 78rem) {
   .toc {
-    display: block; position: fixed; top: 3.4rem; left: calc(50% - 37.5rem); width: 13rem;
+    display: block; position: fixed; top: 9rem; left: calc(50% - 37.5rem); width: 13rem;
     max-height: calc(100vh - 6rem); overflow-y: auto;
-    font: 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+    font: 13px/1.4 var(--sans);
   }
 }
 .toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--rule); }
 .toc li { margin: 0; }
 .toc li.gap { margin-top: .9rem; }
-.toc a { display: block; margin-left: -1px; padding: .28rem 0 .28rem .9rem; border-left: 2px solid transparent; color: var(--muted); transition: color .15s, border-color .15s; }
+.toc a { text-decoration: none; display: block; margin-left: -1px; padding: .28rem 0 .28rem .9rem; border-left: 2px solid transparent; color: var(--muted); transition: color .15s, border-color .15s; }
 .toc a:hover { color: var(--ink); text-decoration: none; }
 .toc a[aria-current] { color: var(--ink); border-left-color: var(--ink); }
 header, h2[id] { scroll-margin-top: 1.5rem; }
@@ -103,7 +68,7 @@ header, h2[id] { scroll-margin-top: 1.5rem; }
   --card: #fbfbf9; --border: #e4e2db; --grid: #e6e5df; --axis: #c3c2b7; --tick: #6b6a65; --ink2: #52514e; --pill: #ffffff;
   --m-mini: #eb6834; --m-luna: #2a78d6; --m-luna-high: #1baf7a; --m-opus: #eda100;
   background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-  padding: 16px 18px 12px; font: 13px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+  padding: 16px 18px 12px; font: 13px/1.45 var(--sans);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .chart-card {
@@ -115,10 +80,10 @@ header, h2[id] { scroll-margin-top: 1.5rem; }
   --card: #1f1e1c; --border: #34332f; --grid: #2c2c2a; --axis: #4a4945; --tick: #a3a19a; --ink2: #c3c2b7; --pill: #262522;
   --m-mini: #d95926; --m-luna: #3987e5; --m-luna-high: #199e70; --m-opus: #c98500;
 }
-.chart-title { margin: 0 0 10px; text-align: center; font-size: 15px; font-weight: 650; }
+.chart-title { margin: 0 0 10px; text-align: center; font-size: 15px; font-weight: 600; }
 .chart-filters { display: flex; align-items: flex-start; gap: 10px; }
 .filter-rows { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; align-items: center; flex: 1; }
-.filter-label { color: var(--tick); font-size: 11px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
+.filter-label { color: var(--tick); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
 .pills { display: flex; flex-wrap: wrap; gap: 6px; }
 .chart .empty { fill: var(--tick); font-size: 13px; }
 .pills button, .replay {
@@ -134,7 +99,7 @@ header, h2[id] { scroll-margin-top: 1.5rem; }
 .plot { position: relative; margin-top: 8px; }
 .chart { display: block; width: 100%; height: auto; overflow: visible; touch-action: pan-y; user-select: none; }
 .chart .zoom-box { fill: var(--ink); fill-opacity: .06; stroke: var(--ink2); stroke-dasharray: 3 3; pointer-events: none; }
-.chart text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+.chart text { font-family: var(--sans); }
 .chart .grid { stroke: var(--grid); stroke-width: 1; }
 .chart .grid.knee { stroke: var(--axis); }
 .chart .clock { fill: var(--tick); font-size: 12px; font-variant-numeric: tabular-nums; transition: opacity .35s; }
@@ -160,10 +125,10 @@ header, h2[id] { scroll-margin-top: 1.5rem; }
   background: var(--card); color: var(--ink); border: 1px solid var(--border); border-radius: 8px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, .12); padding: 8px 10px; font-size: 12px; line-height: 1.45;
 }
-.tip .tip-head { display: flex; align-items: center; gap: 6px; font-weight: 650; }
+.tip .tip-head { display: flex; align-items: center; gap: 6px; font-weight: 600; }
 .tip .key { width: 14px; height: 0; border-top: 2.5px solid; border-radius: 2px; flex: none; }
 .tip .muted { color: var(--tick); }
-.tip strong { font-weight: 650; }
+.tip strong { font-weight: 600; }
 .chart-hint { margin: 4px 0 0; color: var(--tick); font-size: 12px; }
 .chart-card figcaption { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--grid); }
 tr.group td { border-top: 1px solid var(--rule); }
@@ -178,7 +143,7 @@ tr.group td { border-top: 1px solid var(--rule); }
 #tab-photos tbody td:first-child { text-align: left; }
 #tab-cross td.diag { background: var(--soft); }
 #tab-cross td.pending { color: var(--muted); }
-#fig-cross .chart .panel-name { fill: var(--ink); font-size: 13px; font-weight: 650; }
+#fig-cross .chart .panel-name { fill: var(--ink); font-size: 13px; font-weight: 600; }
 #fig-cross .chart .col-label { fill: var(--ink2); font-size: 11.5px; }
 #fig-cross .chart .seg { stroke-width: 2.4; stroke-linecap: round; transition: opacity .25s; }
 #fig-cross .chart .seg-hit { stroke: transparent; stroke-width: 14; cursor: pointer; }
@@ -188,6 +153,7 @@ tr.group td { border-top: 1px solid var(--rule); }
 </style>
 </head>
 <body>
+<script src="https://zedongpeng.com/assets/js/site-header.js"></script>
 <nav class="toc" aria-label="Contents">
 <ol>
 <li><a href="#top">Introduction</a></li>
@@ -1481,5 +1447,6 @@ Just return the label CORRECT or WRONG in a json format with the key as &quot;la
   mark();
 })();
 </script>
+<footer class="zp-foot small">&copy; 2026 Zedong Peng</footer>
 </body>
 </html>
